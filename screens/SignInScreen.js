@@ -13,8 +13,8 @@ import {InputForm} from '../components/forms/InputForm'
 export const SignInScreen = ({sign}) => {
     
     const [form, setForm] = useState({
-        username:'carlos@gmail.com',
-        password :'123123123'
+        username:'',
+        password :''
     })
 
     const { username, password} = form
