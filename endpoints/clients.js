@@ -3,15 +3,14 @@ import { BASE_URL_API } from "@env"
 
 
 export default {
-    signin : async (params) => {
+    getClients : async (token) => {
 
        let response = await fetch(
-           `${BASE_URL_API}auth/login`,
+           `${BASE_URL_API}clients`,
            {
-            method:'POST',
-            body:JSON.stringify(params),
+            method:'GET',
             headers:{
-                'Content-Type': 'application/json'
+                'Authorization': 'Bearer ' + token,
             }
         })
         

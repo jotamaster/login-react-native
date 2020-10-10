@@ -1,4 +1,4 @@
-import {auth} from '../endpoints/index'
+import endpoints from '../endpoints/index';
 
 
 export const login = async (email,password ) => { 
@@ -7,12 +7,12 @@ export const login = async (email,password ) => {
         email,
         password
       }
-      let response = await auth.login(payload)
+      let response = await endpoints.signin(payload)
       if (response.message) return false  
-
       return ({
-        username:'juanito',
+        username:response.username,
         token:response.access_token
+        
       })
 
     } catch (error) {
