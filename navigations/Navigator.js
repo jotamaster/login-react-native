@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack' 
 
 //screens
-import { SignInScreen } from '../screens/SignInScreen'
+import  SignInScreen  from '../screens/SignInScreen'
 import { ClientsScreen } from '../screens/ClientsScreen'
 import { SellsScreen } from '../screens/SellsScreen'
 import { AuthLoadingScreen } from '../screens/AuthLoadingScreen'
@@ -16,14 +16,25 @@ import { AuthLoadingScreen } from '../screens/AuthLoadingScreen'
 
 export default function Navigator() {
 
-    const AppStack = createStackNavigator({ Home: ClientsScreen, Sells: SellsScreen });
+    const AppStack = createStackNavigator(
+      { 
+        Sells: 
+        { 
+          screen:SellsScreen,
+          navigationOptions:{
+              title:'Pedidos'
+          }
+        }, 
+        Clients: ClientsScreen 
+      }
+    );
     const AuthStack = createStackNavigator({ SignInScreen });
     
     
     const TabNavigator = createBottomTabNavigator({
-      Home: AppStack,
-      Other: ClientsScreen,
-    },{
+      Pedidos: AppStack,
+      Clientes: ClientsScreen,
+      },{
       defaultNavigationOptions: ({ navigation }) => ({
         
       }),

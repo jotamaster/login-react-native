@@ -52,12 +52,10 @@ export const ClientsScreen = ({navigation}) => {
 
     }, [])
 
-    
-    
 
     return (
       <View style={styles.container} >
-        <Text>lista de clientes 1</Text>
+        <Text>lista de s 1</Text>
         <Button title={'get token'} onPress={()=> getToken()}></Button>
         <Button title={'cerrar sesion'} onPress={()=> _signOutAsync()}></Button>
         {

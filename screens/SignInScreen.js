@@ -13,7 +13,7 @@ from 'react-native';
 import {login} from '../utils/auth'
 import {InputForm} from '../components/forms/InputForm'
 
-export const SignInScreen = ({navigation}) => {
+ const SignInScreen = ({navigation}) => {
 
     
     const [form, setForm] = useState({
@@ -75,6 +75,11 @@ export const SignInScreen = ({navigation}) => {
     )
 }
 
+SignInScreen.navigationOptions = {
+  headerShown: false,
+};
+
+export default SignInScreen
 
 
 const styles = StyleSheet.create({
