@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { FloatingAction } from "react-native-floating-action";
+
 import endpoints from '../endpoints/index';
+
+
 
 import {
     Button,
@@ -7,30 +11,25 @@ import {
     StyleSheet,
     Text,
     ToastAndroid,
-    AsyncStorage
+    AsyncStorage,
+    FlatList
   } from 'react-native';
 
 
-export const ClientsScreen = ({navigation}) => {
+ const ClientsScreen = ({navigation}) => {
+
+  const actions = [
+    {
+      text: "Agregar cliente",
+      icon: require("../assets/favicon.png"),
+      name: "add_client",
+      position: 2,
+      goto:'CreateClient'
+    },
+  ];
 
     const [clients, setClients] = useState([])
-    
-    // const fetchClient = async () =>{
-      
-    //   let userToken = await AsyncStorage.getItem('token');
-    //   let data = await endpoints.getClients(userToken)
-      
-    //   return data.data
 
-    // }
-
-    const getToken = async () =>{
-      await AsyncStorage.setItem('jean', 'hola');
-      let userToken = await AsyncStorage.getItem('jean');
-
-      console.log(userToken)
-
-    }
 
     const _signOutAsync = async () => {
       await AsyncStorage.clear();
@@ -42,6 +41,7 @@ export const ClientsScreen = ({navigation}) => {
       const fetchClient = async () =>{
         let userToken = await AsyncStorage.getItem('token');
         let data = await endpoints.getClients(userToken)
+        console.log('hola')
             setClients(data.data)
       }
           fetchClient()
@@ -55,31 +55,58 @@ export const ClientsScreen = ({navigation}) => {
 
     return (
       <View style={styles.container} >
-        <Text>lista de s 1</Text>
-        <Button title={'get token'} onPress={()=> getToken()}></Button>
-        <Button title={'cerrar sesion'} onPress={()=> _signOutAsync()}></Button>
-        {
-        
-        clients.map((client,index) =>{
-          return(
-            <Text key={client.id}>
-              {client.name} - {client.address}
-            </Text>
-          )
-        })
-        
-        }
+        {/* <Button title={'cerrar sesion'} onPress={()=> _signOutAsync()}></Button> */}
+
+        <FlatList
+        style={styles.containerList}
+          data={clients}
+          keyExtractor={(item, index) => index.toString()}
+          
+          renderItem={({item,index})=>{
+            return(
+              <View key={`${item.name}${index}`} style={styles.rowList}>
+                <Text>
+                  {item.name} - {item.address}
+                </Text>
+              </View>
+            )
+          }}
+        />
+        <FloatingAction
+          actions={actions}
+          onPressItem={goto => {
+            navigation.replace('CreateClient')
+          }}
+        />
       </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+      width:'100%',
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
     },
     form:{
       width:'80%'
+    },
+    containerList:{
+      width:'100%',
+      
+    },
+    rowList:{
+      padding: 20,
+      borderColor: 'gray', 
+      borderBottomWidth: 1,
     }
+    
 });
+
+ClientsScreen.navigationOptions = {
+  title  : 'Lista de clientes'
+}
+
+
+export default  ClientsScreen

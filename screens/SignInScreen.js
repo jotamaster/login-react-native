@@ -32,12 +32,11 @@ import {InputForm} from '../components/forms/InputForm'
     };
 
     const handleInputChange = (value, attr)=>{
-
         setForm({
           ...form,
           [attr]: value
         })
-      }
+    }
 
     const sendData = async (username,password) =>{
         if(!username || !password ) return showToast('Credenciales Incorrectas')

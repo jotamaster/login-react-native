@@ -15,5 +15,20 @@ export default {
         })
         
         return response.json()
+    },
+    setClient: async (token,params) => {
+
+        let response = await fetch(
+            `${BASE_URL_API}clients`,
+            {
+             method:'POST',
+             body:JSON.stringify(params),
+             headers:{
+                 'Authorization': 'Bearer ' + token,
+                 'Content-Type': 'application/json'
+             }
+         })
+         
+         return response.json()
     }
 }

@@ -8,11 +8,10 @@ import { createStackNavigator } from 'react-navigation-stack'
 
 //screens
 import  SignInScreen  from '../screens/SignInScreen'
-import { ClientsScreen } from '../screens/ClientsScreen'
+import  ClientsScreen  from '../screens/ClientsScreen'
+import  CreateClientScreen  from '../screens/CreateClientScreen'
 import { SellsScreen } from '../screens/SellsScreen'
 import { AuthLoadingScreen } from '../screens/AuthLoadingScreen'
-
-
 
 
 export default function Navigator() {
@@ -26,15 +25,19 @@ export default function Navigator() {
               title:'Pedidos'
           }
         }, 
-        Clients: ClientsScreen 
+        CreateSells: ClientsScreen 
       }
     );
+    const ClientsStack = createStackNavigator({
+      Clients : ClientsScreen,
+      CreateClient: CreateClientScreen
+    })
     const AuthStack = createStackNavigator({ SignInScreen });
     
     
     const TabNavigator = createBottomTabNavigator({
       Pedidos: AppStack,
-      Clientes: ClientsScreen,
+      Clientes: ClientsStack,
       },{
         defaultNavigationOptions: ({ navigation }) => ({
           tabBarIcon: ({ focused, horizontal, tintColor }) => {
