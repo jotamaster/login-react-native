@@ -1,11 +1,12 @@
 
-let baseUrl = 'http://jeanhernandezo.cl:3800/api/'
+import { BASE_URL_API } from "@env"
+
 
 export default {
-    login : async (params) => {
+    signin : async (params) => {
 
        let response = await fetch(
-           `${baseUrl}auth/login`,
+           `${BASE_URL_API}auth/login`,
            {
             method:'POST',
             body:JSON.stringify(params),
